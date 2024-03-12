@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Lizé's Germany Guide</title>
+    <link rel="icon" type="image/vnd.microsoft.icon" href="resources/icon/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&family=Space+Grotesk:wght@300..700&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/d04bf74b21.js" crossorigin="anonymous"></script>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    body {
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+        color: white;
+        font-family: Space Grotesk;
+        font-size: .833333vw;
+        background-color: black;
+    }
+    video, img {
+        user-drag: none;
+        -webkit-user-drag: none;
+        user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -o-user-select: none;
+        width: max-content;
+    }
+    .header {
+        left: 0;
+        position: fixed;
+        right: 0;
+        top: 1.875em;
+        z-index: 999;
+        padding-left: 1.875em;
+        padding-right: 1.875em;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #footer {
+        bottom: .6em;
+        top: auto;
+    }
+    .header img {
+        max-height: 5em;
+    }
+    p {
+        line-height: 150%;
+        font-size: 1.25em;
+        text-align: justify;
+    }
+    .info p {
+        flex: 1;
+    }
+    #travel-info-button {
+        display: none;
+    }
+    #main-logo {
+        display: none;
+    }
+
+    .primary-button {
+        background-color: white;
+        color: black;
+        gap: 0.5em;
+        padding: 1.1875em 1.875em;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        border-radius: 20em;
+        cursor: pointer;
+        font-weight: bold;
+        user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -o-user-select: none;
+    }
+
+    .more-info-button {
+        margin: 0 auto;
+        padding: 0.6em 1em;
+        z-index: 1000;
+        margin-bottom: 1.5em;
+    }
+    
+    body::-webkit-scrollbar {
+        display: none;
+    }
+    .section {
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-items: center;
+    }
+    .section-label {
+        display: flex;
+        flex-direction: column;
+        z-index: 10;
+        margin-left: 1.875em;
+        margin-right: 1.875em;
+        margin-bottom: 1.5em;
+        border-bottom: 1px solid hsla(0, 0%, 100%, .2);
+        padding-bottom: 1.5em;
+    }
+    .section-label img {
+        max-height: 60px;
+    }
+    .info {
+        display: flex;
+        justify-content: space-between;
+        gap: 2.5em;
+        flex: 1 1 0px;
+    }
+    #music-cta {
+        position: fixed;
+        bottom: 1em;
+        left: 5em;
+        z-index: 999;
+        opacity: 60%;
+        width: 100px;
+    }
+
+    @media (max-width: 1024px) {
+        body {
+            font-size: 1.2vw;
+        }
+    }
+    @media (min-width: 769px) {
+        .section-label {
+            max-width: 55.125em;
+        }
+    }
+    @media (max-width: 768px) {
+        body {
+            font-size: 1.7vw;
+        }
+        .section-label {
+            gap: 1.5em;
+        }
+        .info {
+            display: block;
+            text-align: justify;
+        }
+        .info p {
+            display: inline;
+        }
+        .info p:not(:first-child) {
+            /* margin-left: 0.25em; */
+        }
+        #music-cta {
+            position: fixed;
+            bottom: 0.2em;
+            left: 6em;
+            z-index: 999;
+            opacity: 60%;
+            width: 60px;
+            transform: rotate(20deg);
+        }
+    }
+
+    @media (max-width: 640px) {
+        body {
+            font-size: 2.3vw;
+        }
+        p {
+            font-size: 1em;
+        }
+    }
+
+    .video-wrapper {
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    body {
+        padding: 0;
+        margin: 0;
+    }
+    #overlay {
+        z-index: 9999;
+        position: fixed;
+        opacity: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(3px);
+        pointer-events: none;
+        transition: 200ms ease-in-out;
+    }
+    #overlay.active {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        border: 1px solid black;
+        border-radius: 5em;
+        z-index: 10000;
+        background-color: white;
+        width: 800px;
+        min-height: 400px;
+        transition: 200ms ease-in-out;
+    }
+    .modal.active {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    #loading-overlay {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgb(20, 20, 20);
+        z-index: 1000000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100vw;
+    }
+    #cat-wrap {
+        width: 80%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        margin-top: 8em;
+    }
+    #marco{
+        width: 1325px;
+        height: 500px;
+        border-radius: 16px;
+        position: relative;
+    }
+
+    #cielo{
+        border-radius: 16px;
+        width: 1325px;
+        height: 500px;
+        background: linear-gradient(to bottom,  #0B4C5F 0%,#04B4AE 52%,rgba(20, 20, 20, 0) 70%); 
+        position: absolute;
+        z-index: -30;
+        top: 0;
+        margin-top: 2em;
+    }
+
+    #edificios{
+        background: url('https://res.cloudinary.com/pastelitos/image/upload/v1610526533/eva/edificiosOne_fsg7nx.svg');
+        height: 500px; 
+        width: 1325px;
+        z-index: -10;
+        top: 6.5em;
+        background-position: 0px 0px;
+        background-repeat: repeat-x;
+        -webkit-animation: animar_edificios 120s linear infinite;
+        -ms-animation: animar_edificios 120s linear infinite;
+        -moz-animation: animar_edificios 120s linear infinite;
+        position: absolute;
+    }
+
+    @keyframes  animar_edificios {
+        from { background-position: 0 0; }
+        to { background-position: 100% 0; }
+    }
+    @-webkit-keyframes  animar_edificios {
+        from { background-position: 0 0; }
+        to { background-position: 100% 0; }
+    }
+    @-ms-keyframes  animar_edificios {
+        from { background-position: 0 0; }
+        to { background-position: 100% 0; }
+    }
+    @-moz-keyframes  animar_edificios {
+        from { background-position: 0 0; }
+        to { background-position: 100% 0; }
+    }
+    
+    #luna {
+        width: 6em;
+        height: 6em;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        -moz-box-shadow: 30px 10px 0 #F7F8E0;
+        -webkit-box-shadow: 30px 10px 0 #F7F8E0;
+        box-shadow: 30px 10px 0 #F7F8E0;
+        margin-top: 1em;
+        margin-left: 70%;
+        z-index: -19;
+        transform: translateY(40px);
+    }
+
+    #muro{
+        height: 23em;
+        width: 100%;
+        background: -moz-linear-gradient(top,  #311801 0%, rgb(20, 20, 20) 19%); 
+        background: -webkit-linear-gradient(top,  #311801 0%,rgb(20, 20, 20) 19%); 
+        background: linear-gradient(to bottom,  #311801 0%,rgb(20, 20, 20) 19%); 
+        bottom:0px; 
+    }
+
+    #gato{
+        background: url('https://res.cloudinary.com/pastelitos/image/upload/v1610526571/eva/gatito_pushui.svg');
+        height: 297px; 
+        width: 507.5px;
+        margin-top: -3em;
+        margin-left: 2em;
+        z-index: 10;
+        -webkit-animation: sprite-animation 1.2s steps(16,end) infinite;
+        -moz-animation: sprite-animation 1.2s steps(16,end) infinite; 
+        -ms-animation: sprite-animation 1.2s steps(16,end) infinite; 
+        animation: sprite-animation 1.2s steps(16,end) infinite;
+    }
+
+    @-webkit-keyframes sprite-animation { 
+        from { background-position: 0 0; }
+        to { background-position: -8120px 0; } 
+    }
+
+    @-ms-keyframes sprite-animation { 
+        from { background-position: 0 0; }
+        to { background-position: -8120px 0; }
+    }
+
+    @-moz-keyframes sprite-animation { 
+        from { background-position: 0 0; }
+        to { background-position: -8120px 0; }
+    }
+
+    @keyframes sprite-animation { 
+        from { background-position: 0 0; }
+        to { background-position: -8120px 0; }
+    }
+    #loading-label {
+        font-size: 2.2em;
+        width: 80%;
+        text-align: center;
+        font-weight: bold;
+        z-index: 10;
+        margin-top: -2em;
+    }
+
+    @media (max-width: 1500px) {
+        #walking-cat {
+            transform: scale(0.9) translateX(100px);
+        }
+        #luna {
+            margin-left: 50%;
+            width: 8em;
+            height: 8em;
+            margin-top: -2em;
+        }
+        #gato {
+            margin-top: -8em;
+        }
+    }
+
+    @media (max-width: 755px) {
+        #walking-cat {
+            transform: scale(0.6) translateX(150px);
+        }
+        #luna {
+            margin-left: 50%;
+            width: 8em;
+            height: 8em;
+            margin-top: -2em;
+        }
+        #gato {
+            margin-top: -4.4em;
+        }
+
+    }
+
+    @media (max-width: 570px) {
+        #walking-cat {
+            transform: scale(0.5) translateX(200px);
+        }
+        #luna {
+            margin-left: 50%;
+            width: 8em;
+            height: 8em;
+            margin-top: -2em;
+        }
+        #loading-label {
+            margin-top: -5em;
+        }
+        #gato {
+            margin-top: -6em;
+        }
+    }
+
+    @media (max-width: 410px) {
+        #walking-cat {
+            transform: scale(0.36) translateX(200px);
+        }
+        #luna {
+            margin-left: 50%;
+            width: 8em;
+            height: 8em;
+            margin-top: -2em;
+        }
+        #loading-label {
+            margin-top: -9em;
+        }
+    }
+
+    #music-button {
+        width: 3.375em;
+        height: 3.375em;
+        border-radius: 50%;
+        background-color: white;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #developed-by {
+        height: 4.5em;
+    }
+    #scroll-cta {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        z-index: 999;
+        font-size: 1.5em;
+        opacity: 60%;
+        line-height: 90%;
+        text-align: center;
+        gap: .5em;
+    }
+    .arrow {
+      animation: scroll .35s ease-in alternate infinite;
+    }
+    @keyframes scroll {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(10px);
+        }
+    }
+</style>
+<body>
+    <div id="overlay" data-close-modal></div>
+    <div id="scroll-cta">
+        <div>SCROLL<br>FOR MORE</div>
+        <svg version="1.1" id="svg-arrow-down" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" viewBox="0 0 22 35" style="enable-background:new 0 0 22 35;" xml:space="preserve" height="2em">
+            <polygon class="arrow" style="fill:#ffffff;" points="20.58,11.584 12.004,20.158 12.004,0 9.996,0 9.996,20.158 1.42,11.584 0,13.004 11,24
+        					22,13.004 "></polygon>
+        </svg>
+    </div>
+
+    <img src="resources/pictures/music-cta.png" alt="" id="music-cta">
+    <div class="header" id="header">
+        <img src="resources/pictures/main-logo-3.png" alt="" id="main-logo">
+        <div class="primary-button" id="travel-info-button" data-modal-target="#modal-tips">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1em"><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm306.7 69.1L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
+            <div>General travel tips</div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="video-wrapper">
+            <video src="resources/videos/neuschwanstein.mp4" autoplay loop muted></video>
+        </div>
+        <div class="section-label">
+            <img src="resources/pictures/NC-logo-text.png" alt="">
+            <div class="info">
+                <p><b>Schloss Neuschwanstein</b>, is a fairy-tale-like castle located in the German Alps. It's an iconic symbol of romantic architecture.</p>
+                <p>From its appearance, you can tell that this place was the original inspiration of the world-renowned Disney castle!</p>
+            </div>
+        </div>
+        <div class="more-info-button primary-button" data-modal-target="#modal-neuschwanstein">
+            More info about this
+        </div>
+    </div>
+    <div class="section">
+        <div class="video-wrapper">
+            <video src="resources/videos/europapark.mp4" autoplay loop muted></video>
+        </div>
+        <div class="section-label">
+            <img src="resources/pictures/EP-logo.png" alt="">
+            <div class="info">
+                <p>Located right at the French border, <b>Europapark</b> is one of the biggest and most popular theme parks in Europe. While it </p>
+                <p>offers many thrilling rollercoasters you can also find a lot of more relaxed activities and just enjoy the atmosphere.</p>
+                <!-- Maybe someone can convince you to try one of the many thrilling rides, else you will miss out! -->
+            </div>
+        </div>
+        <div class="more-info-button primary-button" data-modal-target="#modal-europapark">
+            More info about this
+        </div>
+    </div>
+    <div class="section">
+        <div class="video-wrapper">
+            <video src="resources/videos/rothenburg.mp4" autoplay loop muted></video>
+        </div>
+        <div class="section-label">
+            <img src="resources/pictures/RodT-logo-text.png" alt="">
+            <div class="info">
+                <p>This beautiful medieval German city, close to my hometown, is a great place to dive into Germany's history. You can wander</p>
+                <p>through the small old-town and enjoy the well-preserved architecture. It is also known as the Christmas capital of Germany</p>
+            </div>
+        </div>
+        <div class="more-info-button primary-button" data-modal-target="#modal-rothenburg">
+            More info about this
+        </div>
+    </div>
+    <div class="section">
+        <div class="video-wrapper">
+            <video src="resources/videos/hamburg.mp4" autoplay loop muted></video>
+        </div>
+        <div class="section-label">
+            <img src="resources/pictures/HB-logo-text.png" alt="">
+            <div class="info">
+                <p>The port city <b>Hamburg</b>, is probably the prettiest city in Germany. You can see modern architecture merged with historic</p>
+                <p>ambiance giving it a timeless unique look. The waterfront is really beautiful as well, adding to the city's charm.</p>
+            </div>
+        </div>
+        <div class="more-info-button primary-button" data-modal-target="#modal-hamburg">
+            More info about this
+        </div>
+    </div>
+    <div class="section">
+        <div class="video-wrapper">
+            <video src="resources/videos/bodensee.mp4" autoplay loop muted></video>
+        </div>
+        <div class="section-label">
+            <img src="resources/pictures/Bodensee-logo.png" alt="">
+            <div class="info">
+                <p>Lake Constance or <b>Bodensee</b> is a lake in the south of Germany. Due to the being right at the border, it is shared with Austria</p>
+                <p>and Switzerland. The area is beautiful and offers many outdoor activities. It is also a perfect place to learn how to ride a bike.</p>
+            </div>
+        </div>
+        <div class="more-info-button primary-button" data-modal-target="#modal-hamburg">
+            More info about this
+        </div>
+    </div>
+    <div class="section">
+        <div class="video-wrapper">
+            <video src="resources/videos/koeln.mp4" autoplay loop muted></video>
+        </div>
+        <div class="section-label">
+            <img src="resources/pictures/Köln-logo.png" alt="">
+            <div class="info">
+                <p><b>Köln</b> is famous for it's astonishing cathedral. But also apart from that, the whole city is beautiful and charming.</p>
+                <p>The unique carnival in Köln also offers a great experience. Especially the parade is really interesting. You shouldn't miss it.</p>
+            </div>
+        </div>
+        <div class="more-info-button primary-button" data-modal-target="#modal-hamburg">
+            More info about this
+        </div>
+    </div>
+    <div class="section">
+        <div class="video-wrapper">
+            <video src="resources/videos/lofoten.mp4" autoplay loop muted></video>
+        </div>
+        <div class="section-label">
+            <img src="resources/pictures/Lofoten-logo.png" alt="">
+            <div class="info">
+                <p>It's not in Germany, but because I know how much you enjoyed New Zealand, I have to recommend you Norway, in particular</p>
+                <p>the <b>Lofoten</b>! I'm sure the stunning nature will remind you of New Zealand and as a cherry on top you can also see the aurora!</p>
+            </div>
+        </div>
+        <div class="more-info-button primary-button" data-modal-target="#modal-hamburg">
+            More info about this
+        </div>
+    </div>
+
+
+
+    <div class="modal" id="modal-neuschwanstein">
+    
+    </div>
+    <div class="modal" id="modal-europapark">
+
+    </div>
+    <div class="modal" id="modal-rothenburg"></div>
+    <div class="modal" id="modal-hamburg"></div>
+    <div class="modal" id="modal-tips">
+
+    </div>
+
+    <div id="loading-overlay">
+        <div id="cat-wrap">
+            <div id="walking-cat">
+                <div id="marco">
+                    <div id="cielo"></div>
+                    <div id="luna"></div>
+                    <div id="gato"></div>
+                    <div id="muro"></div>
+                    <div id="edificios"></div>
+                </div>
+            </div>
+        </div>
+        <div id="loading-label">Loading resources, please wait<p id="dots" style="display: inline; margin: 0; position: absolute; line-height: normal; font-size: inherit;"></p></div>
+    </div>
+    <div id="footer" class="header">
+        <div id="music-button">
+
+        </div>
+        <img src="resources/pictures/designed-by.png" alt="" id="developed-by" onerror="this.style.display='none'">
+    </div>
+    <audio id='sound' loop='true' type='audio/mp4' controller='false' height='0' width='0'>
+</body>
+<script type="text/javascript" src="plugins/SmoothScroll.js" id="SmoothScroll-js"></script>
+<script>
+    let loading = true;
+
+    let dots = 0;
+    let up = true;
+    setInterval(() => {
+        const label = document.getElementById("dots");
+        if (up) {
+            dots += 1;
+            if (dots == 3) up = false;
+        } else {
+            dots -= 1;
+            if (dots == 0) up = true;
+        }
+        label.innerHTML = ".".repeat(dots);
+    }, 500);
+
+    window.addEventListener('scroll', closeScrollCta);
+    document.body.addEventListener('keydown', closeScrollCta);
+    document.body.addEventListener('click', closeScrollCta);
+    document.body.addEventListener('touchstart', closeScrollCta);
+
+    function closeScrollCta() {
+        document.getElementById("scroll-cta").setAttribute("style", "display: none;")
+        document.getElementById("music-cta").setAttribute("style", "display: none;")
+    }
+
+    window.onload = () => {
+        window.history.scrollRestoration = 'manual';
+    };
+    SmoothScroll({
+        frameRate: 150,
+        animationTime: 1000,
+        stepSize: 60,
+        pulseAlgorithm: 1,
+        pulseScale: 4,
+        pulseNormalize: 1,
+        accelerationDelta: 50,
+        accelerationMax: 3,
+        keyboardSupport: 1,
+        arrowScroll: 50,
+        fixedBackground: 0
+    });
+
+    setInterval(() => {
+        let scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
+        let vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+
+        let screenCenter = scrollPos + 0.5 * vh;
+
+        var sections = document.getElementsByClassName("section");
+        let i = 0;
+        for (let section of sections) {
+            i++;
+            var rect = section.getBoundingClientRect();
+            let divCenter = scrollPos + (rect.bottom + rect.top) / 2;
+            let videoWrapper = section.getElementsByClassName("video-wrapper")[0];
+            let calculatedTransform = 0;
+            calculatedTransform = (screenCenter - divCenter) / 1.8;
+            videoWrapper.setAttribute("style", "transform: scale(1.2) translateY(" + calculatedTransform + "px);");
+        }
+
+
+    }, 1);
+
+    const openModalButtons = document.querySelectorAll("[data-modal-target]");
+    const closeModalElements = document.querySelectorAll("[data-close-modal]");
+    const overlay = document.getElementById("overlay");
+
+    openModalButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            console.log(button.dataset.modalTarget)
+            const modal = document.querySelector(button.dataset.modalTarget);
+            openModal(modal);
+        });
+    });
+
+    closeModalElements.forEach((element) => {
+        element.addEventListener("click", () => {closeModal();})
+    })
+
+    function openModal(modal) {
+        console.log("OPENING MODAL")
+        console.log(modal)
+        if (modal==null) return;
+        modal.classList.add("active");
+        overlay.classList.add("active");
+    }
+
+    function closeModal() {
+        overlay.classList.remove("active");
+        const modals = document.querySelectorAll(".modal");
+        console.log(modals)
+        modals.forEach(modal => {modal.classList.remove("active")});
+    }
+
+    setTimeout(() => {
+        closeLoader();
+
+    }, 10 + Math.random()*20);
+    function closeLoader() {
+
+        document.getElementById("loading-overlay").setAttribute("style", "display: none;");
+        setTimeout(() => {
+
+            let headerAnimY = 100;
+
+            let headerAnimInterval = setInterval(() => {
+                if (headerAnimY > 0) {
+                    headerAnimY -= 5;
+                    document.getElementById("main-logo").setAttribute("style", "display: flex; transform: translateY(" + Math.round(headerAnimY / 7) + "px); opacity: " + (100 - headerAnimY) / 100)
+                } else {
+                    document.getElementById("main-logo").setAttribute("style", "display: flex; transform: translateY(0px);")
+                    clearInterval(headerAnimInterval);
+                }
+            }, 15);
+
+        }, 300);
+
+        setTimeout(() => {
+            let headerAnimY = 100;
+
+            let headerAnimInterval = setInterval(() => {
+                if (headerAnimY > 0) {
+                    headerAnimY -= 5;
+                    document.getElementById("travel-info-button").setAttribute("style", "display: flex; transform: translateY(" + Math.round(headerAnimY / 7) + "px); opacity: " + (100 - headerAnimY) / 100)
+                } else {
+                    document.getElementById("travel-info-button").setAttribute("style", "display: flex; transform: translateY(0px);")
+                    clearInterval(headerAnimInterval);
+                }
+            }, 15);
+        }, 350);
+    }
+
+</script>
+<script>
+
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    const Parameters = function () {
+        this.speed = 0.1;
+        this.amplitude = 40;
+        this.frequency = 3;
+        this.reverse = false;
+        return this;
+    }
+
+    const params = new Parameters();
+
+    const details = 20;
+
+    let amplitude = 0;
+
+    document.getElementById("music-button").appendChild(canvas);
+
+    // canvas.style.backgroundColor = "black";
+    canvas.setAttribute("style", "height: 30%; width: 70%")
+
+    const points = [];
+
+    for (let i = 0; i < details * 24; i++) {
+        points.push(Math.sin(i * Math.PI / details));
+    }
+
+    const calc = t => {
+        points.forEach((p, i) => {
+            points[i] = Math.sin(i * Math.PI / details + t);
+        });
+    };
+
+    const grd = ctx.createLinearGradient(0, 0, canvas.width, 0);
+    grd.addColorStop(0, "black");
+    grd.addColorStop(1, "black");
+
+    function clamp(num, min, max) {
+        return num <= min ? min : num >= max ? max : num;
+    }
+
+    const draw = () => {
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+        ctx.lineWidth = 17;
+        ctx.strokeStyle = grd;
+        ctx.moveTo(0, canvas.height / 2);
+        points.forEach((p, i) => {
+            ctx.lineTo(i * 2.8, (p * amplitude * clamp(0, 1)) + canvas.height / 2);
+        });
+        ctx.stroke();
+    };
+
+    let t = 0;
+
+    const animate = () => {
+        t = t - 0.18;
+        calc(t);
+        draw();
+        requestAnimationFrame(animate);
+    };
+
+
+    animate();
+
+    var songs = ["je-veux.m4a", "tout-le-monde.m4a", "la-quete.m4a", "vie-en-rose.m4a"];
+    var remainingSongs = ["tout-le-monde.m4a"];
+    var audio = document.getElementById("sound");
+
+    audio.volume = 0.5;
+
+    var pickSong = function () {
+        if (!remainingSongs.length) {
+            remainingSongs = songs;
+        }
+
+        var index = Math.floor(Math.random() * (remainingSongs.length - 1));
+
+        var soundFile = remainingSongs[index];
+
+        remainingSongs.splice(index, 1);
+
+        audio.setAttribute("src", "resources/audio/" + soundFile);
+    }
+
+    pickSong();
+    audio.addEventListener("ended", pickSong, false);
+
+
+    document.getElementById("music-button").addEventListener("click", () => {
+        if (audio.paused) {
+            audio.play();
+            startAnimation();
+        } else {
+            endAnimation();
+        }
+    });
+
+    function startAnimation() {
+        let i = 0;
+        let interval = setInterval(() => {
+            i++;
+            amplitude = (i / 100) * 60;
+            if (i == 100) {
+                clearInterval(interval);
+            };
+            audio.volume = (i / 100) * 0.50;
+
+        }, 7)
+    }
+
+    function endAnimation() {
+        let i = 100;
+        let interval = setInterval(() => {
+            i--;
+            amplitude = (i / 100) * 60;
+            if (i == 0) {
+                clearInterval(interval);
+                audio.pause();
+            };
+            audio.volume = (i / 100) * 0.50;
+
+        }, 7)
+    }
+
+</script>
+</html>
