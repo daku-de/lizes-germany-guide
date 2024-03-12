@@ -633,7 +633,7 @@
         </div>
         <img src="resources/pictures/designed-by.png" alt="" id="developed-by" onerror="this.style.display='none'">
     </div>
-    <audio id='sound' loop='true' type='audio/mp4' controller='false' height='0' width='0'>
+    <audio id='sound' loop='true' type='audio/mp4' controller='false' height='0' width='0' src="resources/audio/tout-le-monde.m4a">
 </body>
 <script type="text/javascript" src="plugins/SmoothScroll.js" id="SmoothScroll-js"></script>
 <script>
@@ -732,10 +732,9 @@
         modals.forEach(modal => {modal.classList.remove("active")});
     }
 
-    setTimeout(() => {
+    $("video").get(0).addEventListener("canplay", () => {
         closeLoader();
-
-    }, 10 + Math.random()*20);
+    });
     function closeLoader() {
 
         document.getElementById("loading-overlay").setAttribute("style", "display: none;");
