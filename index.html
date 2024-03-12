@@ -103,6 +103,7 @@
     }
     .section {
         height: 100vh;
+        height: calc(var(--vh, 1vh)*100);
         width: 100vw;
         overflow: hidden;
         position: relative;
@@ -681,7 +682,7 @@
 
     setInterval(() => {
         let scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
-        let vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+        let vh = $(window).height();
 
         let screenCenter = scrollPos + 0.5 * vh;
 
@@ -920,5 +921,15 @@
             }
         })
     });
+</script>
+<script>
+    $(window).on('resize', () => {
+        updateViewportHeight();
+    });
+    function updateViewportHeight() {
+        const height = $(window).height();
+        $("body").get(0).style.setProperty("--vh", (height/100) + "px");
+    }
+    updateViewportHeight();
 </script>
 </html>
