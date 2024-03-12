@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&family=Space+Grotesk:wght@300..700&display=swap"
         rel="stylesheet">
     <script src="https://kit.fontawesome.com/d04bf74b21.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
 </head>
 <style>
     * {
@@ -33,6 +35,9 @@
         -webkit-user-select: none;
         -o-user-select: none;
         width: auto;
+    }
+    video {
+        pointer-events: none;
     }
     .header {
         left: 0;
@@ -488,7 +493,7 @@
     </div>
     <div class="section">
         <div class="video-wrapper">
-            <video src="resources/videos/neuschwanstein.mp4" autoplay loop muted preload></video>
+            <video src="resources/videos/neuschwanstein.mp4" autoplay loop muted preload playsinline></video>
         </div>
         <div class="section-label">
             <div><img src="resources/pictures/NC-logo-text.png" alt=""></div>
@@ -503,7 +508,7 @@
     </div>
     <div class="section">
         <div class="video-wrapper">
-            <video src="resources/videos/europapark.mp4" autoplay loop muted preload></video>
+            <video src="resources/videos/europapark.mp4" loop muted preload playsinline></video>
         </div>
         <div class="section-label">
             <div><img src="resources/pictures/EP-logo.png" alt=""></div>
@@ -519,7 +524,7 @@
     </div>
     <div class="section">
         <div class="video-wrapper">
-            <video src="resources/videos/rothenburg.mp4" autoplay loop muted preload></video>
+            <video src="resources/videos/rothenburg.mp4" loop muted preload playsinline></video>
         </div>
         <div class="section-label">
             <div><img src="resources/pictures/RodT-logo-text.png" alt=""></div>
@@ -534,7 +539,7 @@
     </div>
     <div class="section">
         <div class="video-wrapper">
-            <video src="resources/videos/hamburg.mp4" autoplay loop muted preload></video>
+            <video src="resources/videos/hamburg.mp4" loop muted preload playsinline></video>
         </div>
         <div class="section-label">
             <div><img src="resources/pictures/HB-logo-text.png" alt=""></div>
@@ -549,7 +554,7 @@
     </div>
     <div class="section">
         <div class="video-wrapper">
-            <video src="resources/videos/bodensee.mp4" autoplay loop muted preload></video>
+            <video src="resources/videos/bodensee.mp4" loop muted preload playsinline></video>
         </div>
         <div class="section-label">
             <div><img src="resources/pictures/Bodensee-logo.png" alt=""></div>
@@ -564,7 +569,7 @@
     </div>
     <div class="section">
         <div class="video-wrapper">
-            <video src="resources/videos/koeln.mp4" autoplay loop muted preload></video>
+            <video src="resources/videos/koeln.mp4" loop muted preload playsinline></video>
         </div>
         <div class="section-label">
             <div><img src="resources/pictures/Köln-logo.png" alt=""></div>
@@ -579,7 +584,7 @@
     </div>
     <div class="section">
         <div class="video-wrapper">
-            <video src="resources/videos/lofoten.mp4" autoplay loop muted preload></video>
+            <video src="resources/videos/lofoten.mp4" loop muted preload playsinline></video>
         </div>
         <div class="section-label">
             <div><img src="resources/pictures/Lofoten-logo.png" alt=""></div>
@@ -894,5 +899,26 @@
         }, 7)
     }
 
+</script>
+<script>
+    $.fn.isInViewport = function () {
+        var elementTop = $(this).offset().top;
+        var elementBottom = elementTop + $(this).outerHeight();
+
+        var viewportTop = $(window).scrollTop();
+        var viewportBottom = viewportTop + $(window).height();
+
+        return elementBottom > viewportTop && elementTop < viewportBottom;
+    };
+
+    $(window).scroll(function () {
+        $('video').each(function () {
+            if ($(this).closest(".section").isInViewport()) {
+                $(this)[0].play();
+            } else {
+                $(this)[0].pause();
+            }
+        })
+    });
 </script>
 </html>
