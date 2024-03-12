@@ -732,9 +732,10 @@
         modals.forEach(modal => {modal.classList.remove("active")});
     }
 
-    $("video").get(0).addEventListener("canplay", () => {
+    $("video").get(0).addEventListener("canplaythrough", () => {
         closeLoader();
     });
+
     function closeLoader() {
 
         document.getElementById("loading-overlay").setAttribute("style", "display: none;");
