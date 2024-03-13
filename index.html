@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&family=Space+Grotesk:wght@300..700&display=swap"
         rel="stylesheet">
 
+    <script src="https://player.vimeo.com/api/player.js"></script>
     <script src="https://kit.fontawesome.com/d04bf74b21.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
         integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
@@ -206,6 +207,7 @@
         justify-content: center;
         overflow: hidden;
         height: 100vh;
+        height: calc(var(--vh, 1vh)*100);
         position: absolute;
         top: 0;
         left: 0;
@@ -226,6 +228,7 @@
         backdrop-filter: blur(3px);
         pointer-events: none;
         transition: 200ms ease-in-out;
+
     }
     #overlay.active {
         opacity: 1;
@@ -498,6 +501,18 @@
             transform: translateY(10px);
         }
     }
+    .vimeo-wrapper {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        user-select: none;
+    }
+    iframe {
+        height: 100%;
+        transform: scale(var(--iframe-scale));
+    }
 </style>
 <body>
     <div id="overlay" data-close-modal></div>
@@ -520,7 +535,10 @@
     </div>
     <div class="section">
         <div class="video-wrapper">
-            <video src="resources/videos/neuschwanstein-min.mp4" autoplay loop muted preload playsinline></video>
+            <!-- <video src="resources/videos/neuschwanstein-min.mp4" autoplay loop muted preload playsinline></video> -->
+            <div class="vimeo-wrapper">
+                <iframe src="https://player.vimeo.com/video/922717363?loop=1&autoplay=1&muted=1&title=0&byline=0&portrait=0&transparent=0&autopause=0&autoplay=1&background=1" width="1280" height="720" frameborder="0" title="" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" data-ready="true"></iframe>
+            </div>
         </div>
         <div class="section-label">
             <div><img src="resources/pictures/NC-logo-text.png" alt=""></div>
@@ -535,7 +553,10 @@
     </div>
     <div class="section">
         <div class="video-wrapper">
-            <video src="resources/videos/europapark-min.mp4" loop muted preload playsinline></video>
+            <!-- <video src="resources/videos/europapark-min.mp4" loop muted preload playsinline></video> -->
+            <div class="vimeo-wrapper">
+                <iframe src="https://player.vimeo.com/video/922717231?loop=1&autoplay=0&muted=1&title=0&byline=0&portrait=0&transparent=0&autopause=0&autoplay=1&background=1" width="1280" height="720" frameborder="0" title="" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" data-ready="true"></iframe>
+            </div>
         </div>
         <div class="section-label">
             <div><img src="resources/pictures/EP-logo.png" alt=""></div>
@@ -551,7 +572,10 @@
     </div>
     <div class="section">
         <div class="video-wrapper">
-            <video src="resources/videos/rothenburg-min.mp4" loop muted preload playsinline></video>
+            <!-- <video src="resources/videos/rothenburg-min.mp4" loop muted preload playsinline></video> -->
+            <div class="vimeo-wrapper">
+                <iframe src="https://player.vimeo.com/video/922717387?loop=1&autoplay=1&muted=1&title=0&byline=0&portrait=0&transparent=0&autopause=0&autoplay=1&background=1" width="1280" height="720" frameborder="0" title="" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" data-ready="true"></iframe>
+            </div>
         </div>
         <div class="section-label">
             <div><img src="resources/pictures/RodT-logo-text.png" alt=""></div>
@@ -566,7 +590,10 @@
     </div>
     <div class="section">
         <div class="video-wrapper">
-            <video src="resources/videos/hamburg-min.mp4" loop muted preload playsinline></video>
+            <!-- <video src="resources/videos/hamburg-min.mp4" loop muted preload playsinline></video> -->
+            <div class="vimeo-wrapper">
+                <iframe src="https://player.vimeo.com/video/922717257?loop=1&autoplay=1&muted=1&title=0&byline=0&portrait=0&transparent=0&autopause=0&autoplay=1&background=1" width="1280" height="720" frameborder="0" title="" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" data-ready="true"></iframe>
+            </div>
         </div>
         <div class="section-label">
             <div><img src="resources/pictures/HB-logo-text.png" alt=""></div>
@@ -581,7 +608,10 @@
     </div>
     <div class="section">
         <div class="video-wrapper">
-            <video src="resources/videos/bodensee-min.mp4" loop muted preload playsinline></video>
+            <!-- <video src="resources/videos/bodensee-min.mp4" loop muted preload playsinline></video> -->
+            <div class="vimeo-wrapper">
+                <iframe src="https://player.vimeo.com/video/922715645?loop=1&autoplay=1&muted=1&title=0&byline=0&portrait=0&transparent=0&autopause=0&autoplay=1&background=1" width="1280" height="720" frameborder="0" title="" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" data-ready="true"></iframe>
+            </div>
         </div>
         <div class="section-label">
             <div><img src="resources/pictures/Bodensee-logo.png" alt=""></div>
@@ -596,7 +626,10 @@
     </div>
     <div class="section">
         <div class="video-wrapper">
-            <video src="resources/videos/koeln-min.mp4" loop muted preload playsinline></video>
+            <!-- <video src="resources/videos/koeln-min.mp4" loop muted preload playsinline></video> -->
+            <div class="vimeo-wrapper">
+                <iframe src="https://player.vimeo.com/video/922717295?loop=1&autoplay=1&muted=1&title=0&byline=0&portrait=0&transparent=0&autopause=0&autoplay=1&background=1" width="1280" height="720" frameborder="0" title="" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" data-ready="true"></iframe>
+            </div>
         </div>
         <div class="section-label">
             <div><img src="resources/pictures/Köln-logo.png" alt=""></div>
@@ -611,7 +644,10 @@
     </div>
     <div class="section">
         <div class="video-wrapper">
-            <video src="resources/videos/lofoten-min.mp4" loop muted preload playsinline></video>
+            <!-- <video src="resources/videos/lofoten-min.mp4" loop muted preload playsinline></video> -->
+            <div class="vimeo-wrapper">
+                <iframe src="https://player.vimeo.com/video/922717324?loop=1&autoplay=1&muted=1&title=0&byline=0&portrait=0&transparent=0&autopause=0&autoplay=1&background=1" width="1280" height="720" frameborder="0" title="" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" data-ready="true"></iframe>
+            </div>
         </div>
         <div class="section-label">
             <div><img src="resources/pictures/Lofoten-logo.png" alt=""></div>
@@ -659,7 +695,7 @@
         </div>
         <img src="resources/pictures/designed-by.png" alt="" id="developed-by" onerror="this.style.display='none'">
     </div>
-    <audio id='sound' loop='true' type='audio/mp4' controller='false' height='0' width='0' src="resources/audio/tout-le-monde.m4a">
+    <audio id='sound' loop='true' type='audio/mp4' controller='false' height='0' width='0' src="resources/audio/tout-le-monde.m4a" preload="auto">
 </body>
 <script type="text/javascript" src="plugins/SmoothScroll.js" id="SmoothScroll-js"></script>
 <script>
@@ -758,10 +794,17 @@
         modals.forEach(modal => {modal.classList.remove("active")});
     }
 
-    $("video").get(0).addEventListener("canplaythrough", closeLoader);
+
+    setTimeout(() => {
+        const player = new Vimeo.Player($("iframe").get(0));
+        
+        player.on("timeupdate", () => {
+            closeLoader();
+            player.off("timeupdate");
+        });
+    }, 500);
 
     function closeLoader() {
-        $("video").get(0).removeEventListener("canplaythrough", closeLoader);
         document.getElementById("loading-overlay").classList.add("hidden");
         setTimeout(() => {
 
@@ -943,11 +986,14 @@
     };
 
     $(window).scroll(function () {
-        $('video').each(function () {
+        $('iframe').each(function () {
+            const player = new Vimeo.Player($(this));
             if ($(this).closest(".section").isInViewport()) {
-                $(this)[0].play();
+                player.play();
+                console.log("PLAY VIDEO");
             } else {
-                $(this)[0].pause();
+                player.pause();
+                console.log("PAUSE VIDEO");
             }
         })
     });
@@ -959,6 +1005,7 @@
     function updateViewportHeight() {
         const height = $(window).height();
         $("body").get(0).style.setProperty("--vh", (height/100) + "px");
+        $("body").get(0).style.setProperty("--iframe-scale", (height / 720));
     }
     updateViewportHeight();
 </script>
