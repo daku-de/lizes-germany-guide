@@ -543,7 +543,7 @@
     </div>
     <div class="section">
         <div class="video-wrapper">
-            <img src="resources/pictures/backgrounds/neuschwanstein.jpg" alt="">
+            <img class="background-image" src="resources/pictures/backgrounds/neuschwanstein.jpg" alt="">
         </div>
         <div class="section-label">
             <div><img src="resources/pictures/NC-logo-text.png" alt=""></div>
@@ -558,7 +558,7 @@
     </div>
     <div class="section">
         <div class="video-wrapper">
-            <img src="resources/pictures/backgrounds/europapark.jpg" alt="">
+            <img class="background-image" src="resources/pictures/backgrounds/europapark.jpg" alt="">
         </div>
         <div class="section-label">
             <div><img src="resources/pictures/EP-logo.png" alt=""></div>
@@ -574,7 +574,7 @@
     </div>
     <div class="section">
         <div class="video-wrapper">
-            <img src="resources/pictures/backgrounds/rothenburg.jpg" alt="">
+            <img class="background-image" src="resources/pictures/backgrounds/rothenburg.jpg" alt="">
         </div>
         <div class="section-label">
             <div><img src="resources/pictures/RodT-logo-text.png" alt=""></div>
@@ -589,7 +589,7 @@
     </div>
     <div class="section">
         <div class="video-wrapper">
-            <img src="resources/pictures/backgrounds/hamburg.jpg" alt="">
+            <img class="background-image" src="resources/pictures/backgrounds/hamburg.jpg" alt="">
         </div>
         <div class="section-label">
             <div><img src="resources/pictures/HB-logo-text.png" alt=""></div>
@@ -604,7 +604,7 @@
     </div>
     <div class="section">
         <div class="video-wrapper">
-            <img src="resources/pictures/backgrounds/bodensee.jpg" alt="">
+            <img class="background-image" src="resources/pictures/backgrounds/bodensee.jpg" alt="">
         </div>
         <div class="section-label">
             <div><img src="resources/pictures/Bodensee-logo.png" alt=""></div>
@@ -619,7 +619,7 @@
     </div>
     <div class="section">
         <div class="video-wrapper">
-            <img src="resources/pictures/backgrounds/koeln.jpg" alt="">
+            <img class="background-image" src="resources/pictures/backgrounds/koeln.jpg" alt="">
         </div>
         <div class="section-label">
             <div><img src="resources/pictures/Köln-logo.png" alt=""></div>
@@ -634,7 +634,7 @@
     </div>
     <div class="section">
         <div class="video-wrapper">
-            <img src="resources/pictures/backgrounds/lofoten.jpg" alt="">
+            <img class="background-image" src="resources/pictures/backgrounds/lofoten.jpg" alt="">
         </div>
         <div class="section-label">
             <div><img src="resources/pictures/Lofoten-logo.png" alt=""></div>
@@ -783,8 +783,22 @@
 
 
     setTimeout(() => {
-        closeLoader();
+        let i = 0;
+        const preloadInterval = setInterval(() => {
+            let loaded = true;
+            i++;
+            for (let image of $(".background-image")) {
+                if (!image.complete || image.naturalHeight == 0) {
+                    loaded = false;
+                }
+            }
+            if (loaded || i == 200) {
+                closeLoader();
+                clearInterval(preloadInterval);
+            }
+        }, 20);
     }, 1000);
+
 
     function closeLoader() {
         document.getElementById("loading-overlay").classList.add("hidden");
