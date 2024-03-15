@@ -33,7 +33,27 @@ SmoothScroll({
 });
 
 
-setInterval(() => {
+// setInterval(() => {
+//     let scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
+//     let vh = $(window).height();
+
+//     let screenCenter = scrollPos + 0.5 * vh;
+
+//     var sections = document.getElementsByClassName("section");
+//     let i = 0;
+//     for (let section of sections) {
+//         i++;
+//         var rect = section.getBoundingClientRect();
+//         let divCenter = scrollPos + (rect.bottom + rect.top) / 2;
+//         let videoWrapper = section.getElementsByClassName("video-wrapper")[0];
+//         let calculatedTransform = 0;
+//         calculatedTransform = (screenCenter - divCenter) / 1.8;
+//         videoWrapper.setAttribute("style", "transform: translateY(" + calculatedTransform + "px);");
+//     }
+
+// }, 1);
+
+$(document).scroll(function () {
     let scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
     let vh = $(window).height();
 
@@ -50,8 +70,7 @@ setInterval(() => {
         calculatedTransform = (screenCenter - divCenter) / 1.8;
         videoWrapper.setAttribute("style", "transform: translateY(" + calculatedTransform + "px);");
     }
-
-}, 1);
+})
 
 function calculateScroll() {
     let scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
