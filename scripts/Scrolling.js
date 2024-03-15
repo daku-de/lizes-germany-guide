@@ -53,7 +53,7 @@ setInterval(() => {
     
     calculateScroll();
 
-}, 5);
+}, 1);
 
 function calculateScroll() {
     let scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
