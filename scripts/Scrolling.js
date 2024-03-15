@@ -50,8 +50,6 @@ setInterval(() => {
         calculatedTransform = (screenCenter - divCenter) / 1.8;
         videoWrapper.setAttribute("style", "transform: translateY(" + calculatedTransform + "px);");
     }
-    
-    calculateScroll();
 
 }, 1);
 
