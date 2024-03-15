@@ -48,7 +48,7 @@
 }
 
 #edificios{
-    background: url('../resources/pictures/loading-screen/edificiosOne_fsg7nx.svg');
+    background: url('resources/pictures/loading-screen/edificiosOne_fsg7nx.svg');
     height: 500px; 
     width: 1325px;
     z-index: -10;
@@ -103,7 +103,7 @@
 }
 
 #gato{
-    background: url('../resources/pictures/loading-screen/gatito_pushui.svg');
+    background: url('resources/pictures/loading-screen/gatito_pushui.svg');
     height: 297px; 
     width: 507.5px;
     margin-top: -3em;
