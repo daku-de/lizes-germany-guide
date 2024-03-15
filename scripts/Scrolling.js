@@ -3,6 +3,16 @@ document.body.addEventListener('keydown', closeScrollCta);
 document.body.addEventListener('click', closeScrollCta);
 document.body.addEventListener('touchstart', closeScrollCta);
 
+$.fn.isInViewport = function () {
+    var elementTop = $(this).offset().top;
+    var elementBottom = elementTop + $(this).outerHeight();
+
+    var viewportTop = $(window).scrollTop();
+    var viewportBottom = viewportTop + $(window).height();
+
+    return elementBottom > viewportTop && elementTop < viewportBottom;
+};
+
 function closeScrollCta() {
     document.getElementById("scroll-cta").setAttribute("style", "display: none;")
     setTimeout(() => {document.getElementById("music-cta").setAttribute("style", "display: none;")}, 1500);
@@ -33,26 +43,6 @@ SmoothScroll({
 });
 
 
-// setInterval(() => {
-//     let scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
-//     let vh = $(window).height();
-
-//     let screenCenter = scrollPos + 0.5 * vh;
-
-//     var sections = document.getElementsByClassName("section");
-//     let i = 0;
-//     for (let section of sections) {
-//         i++;
-//         var rect = section.getBoundingClientRect();
-//         let divCenter = scrollPos + (rect.bottom + rect.top) / 2;
-//         let videoWrapper = section.getElementsByClassName("video-wrapper")[0];
-//         let calculatedTransform = 0;
-//         calculatedTransform = (screenCenter - divCenter) / 1.8;
-//         videoWrapper.setAttribute("style", "transform: translateY(" + calculatedTransform + "px);");
-//     }
-
-// }, 1);
-
 $(document).scroll(function () {
     let scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
     let vh = $(window).height();
@@ -62,15 +52,20 @@ $(document).scroll(function () {
     var sections = document.getElementsByClassName("section");
     let i = 0;
     for (let section of sections) {
+        if (!$(section).isInViewport()) {
+            continue;
+        }
         i++;
         var rect = section.getBoundingClientRect();
         let divCenter = scrollPos + (rect.bottom + rect.top) / 2;
         let videoWrapper = section.getElementsByClassName("video-wrapper")[0];
         let calculatedTransform = 0;
-        calculatedTransform = (screenCenter - divCenter) / 1.8;
+        calculatedTransform = (screenCenter - divCenter) / 3;
         videoWrapper.setAttribute("style", "transform: translateY(" + calculatedTransform + "px);");
     }
 })
+
+
 
 function calculateScroll() {
     let scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
