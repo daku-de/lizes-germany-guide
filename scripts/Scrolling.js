@@ -18,6 +18,20 @@ function isTouchDevice() {
      (navigator.msMaxTouchPoints > 0));
 }
 
+SmoothScroll({
+    frameRate: 150,
+    animationTime: 1000,
+    stepSize: 60,
+    pulseAlgorithm: 1,
+    pulseScale: 4,
+    pulseNormalize: 1,
+    accelerationDelta: 50,
+    accelerationMax: 3,
+    keyboardSupport: 1,
+    arrowScroll: 50,
+    fixedBackground: 0
+});
+
 
 setInterval(() => {
     let scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
@@ -42,7 +56,6 @@ setInterval(() => {
 }, 5);
 
 function calculateScroll() {
-    // Smooth scrolling realized in css :)
     let scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
     document.getElementById("smooth-scroll-wrapper").setAttribute("style", "transform: " + "translateY(-" + scrollPos + "px);");
     return
