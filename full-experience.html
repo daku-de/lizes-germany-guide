@@ -1120,16 +1120,6 @@
 <script type="text/javascript" src="scripts/LoadingScreen.js" id="LoadingScreen-js"></script>
 <script type="text/javascript" src="scripts/RandomMusic.js" id="RandomMusic-js"></script>
 <script>
-    $(window).on('resize', () => {
-        updateViewportHeight();
-    });
-    function updateViewportHeight() {
-        const height = $(window).height();
-        $("body").get(0).style.setProperty("--vh", (height/100) + "px");
-    }
-    updateViewportHeight();
-</script>
-<script>
 
     $.fn.isInViewport = function () {
         var elementTop = $(this).offset().top;

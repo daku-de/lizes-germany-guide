@@ -1,3 +1,16 @@
+var viewportHeight = 0;
+
+$(window).on('resize', function () {
+    updateViewportHeight();
+});
+function updateViewportHeight() {
+    let height = $(window).height();
+    viewportHeight = height;
+    $("body").get(0).style.setProperty("--vh", (height/100) + "px");
+}
+updateViewportHeight();
+
+
 window.addEventListener('scroll', closeScrollCta);
 document.body.addEventListener('keydown', closeScrollCta);
 document.body.addEventListener('click', closeScrollCta);
@@ -45,7 +58,8 @@ SmoothScroll({
 
 $(document).scroll(function () {
     let scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
-    let vh = $(window).height();
+    let vh = viewportHeight;
+    console.log(viewportHeight);
 
     let screenCenter = scrollPos + 0.5 * vh;
 
