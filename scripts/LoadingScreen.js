@@ -1,6 +1,6 @@
-document.fonts.ready.then(() => {
-    document.getElementById("loading-label").setAttribute("style", "display: block");
-})
+// document.fonts.ready.then(() => {
+//     document.getElementById("loading-label").setAttribute("style", "display: block");
+// })
 
 
 let loading = true;

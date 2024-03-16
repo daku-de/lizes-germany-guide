@@ -95,10 +95,12 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    overflow: hidden;
 }
 .contents .paragraphs {
     font-size: 1.5em;
     flex-grow: 1;
+    overflow: auto;
 }
 .modal.active {
     transform: translate(-50%, -50%) scale(1);
