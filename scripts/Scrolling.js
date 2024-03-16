@@ -61,7 +61,7 @@ $(document).scroll(function () {
         let videoWrapper = section.getElementsByClassName("video-wrapper")[0];
         let calculatedTransform = 0;
         calculatedTransform = (screenCenter - divCenter) / 3;
-        videoWrapper.setAttribute("style", "transform: translateY(" + calculatedTransform + "px);");
+        videoWrapper.setAttribute("style", "transform: translate3d(0px," + calculatedTransform + "px, 0px);");
     }
 })
 
