@@ -142,7 +142,6 @@
     z-index: 10;
     margin-top: -2em;
     color: black;
-    display: none;
 }
 
 @media (max-width: 1500px) {
