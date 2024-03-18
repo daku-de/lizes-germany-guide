@@ -854,11 +854,23 @@
     };
 
     $("video").get(0).addEventListener("canplaythrough", closeLoaderWrap);
+    var minDelayPassed = false;
+    var firstVideoLoaded = false;
 
     function closeLoaderWrap() {
+        firstVideoLoaded = true;
         $("video").get(0).removeEventListener("canplaythrough", closeLoaderWrap);
-        closeLoader();
+        if (minDelayPassed) {
+            closeLoader();
+        }
     }
+
+    setTimeout(() => {
+        minDelayPassed = true;
+        if (firstVideoLoaded) {
+            closeLoader();
+        }
+    }, 2500);
 
     setTimeout(() => {
         // If it hasn't loaded after 10 seconds
