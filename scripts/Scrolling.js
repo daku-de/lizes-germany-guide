@@ -26,7 +26,6 @@ $.fn.isInViewport = function () {
 
 function closeScrollCta() {
     document.getElementById("scroll-cta").setAttribute("style", "display: none;")
-    setTimeout(() => { document.getElementById("music-cta").setAttribute("style", "display: none;") }, 1500);
 }
 
 window.onload = () => {

@@ -20,12 +20,12 @@ var pickSong = function () {
 
 pickSong();
 audio.addEventListener("ended", pickSong, false);
+audio.addEventListener("play", startAnimation);
 
 
 document.getElementById("music-button").addEventListener("click", () => {
     if (audio.paused) {
         audio.play();
-        startAnimation();
     } else {
         endAnimation();
     }
