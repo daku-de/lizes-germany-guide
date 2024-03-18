@@ -60,6 +60,10 @@
     .info p {
         flex: 1;
     }
+
+    .info p:first-child {
+        text-align-last: justify;
+    }
     #travel-info-button {
         display: none;
     }

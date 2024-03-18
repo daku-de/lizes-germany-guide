@@ -37,7 +37,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    margin: .5em;
+    padding: .5em;
     font-size: 2em;
     z-index: 2;
     cursor: pointer;
@@ -248,6 +248,7 @@
     height: 2em;
     width: 2em;
     text-align: center;
+    flex-shrink: 0;
 }
 
 .item svg {
@@ -317,6 +318,10 @@
         width: 1px;
         height: 80%;
         margin: auto 1em;
+    }
+
+    .item p {
+        margin: 0.5em 0;
     }
 
     .whitespace {
