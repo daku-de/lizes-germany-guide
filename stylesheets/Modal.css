@@ -50,7 +50,7 @@
     padding: .6em .5em;
     padding-bottom: .2em;
     z-index: 2;
-    font-size: 1.5em;
+    font-size: 1.7em;
     font-family: "Fjalla One", sans-serif;
     color: #4c4c4c;
     color: white;
@@ -296,9 +296,10 @@
 }
 
 .korean {
-    font-size: .5em;
+    font-size: .7em;
     color: rgba(255, 255, 255, 0.6);
     line-height: 90%;
+    margin-top: 0.1em;
 }
 
 @media (max-width: 650px) {

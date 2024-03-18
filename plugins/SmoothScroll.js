@@ -216,6 +216,10 @@ function scrollArray(elem, left, top) {
 
     var scrollRoot = getScrollRoot();
     var isWindowScroll = (elem === scrollRoot || elem === document.body);
+    if (isWindowScroll) {
+        isWindowScroll = false;
+        elem = document.getElementById("section-wrap");
+    }
     
     // if we haven't already fixed the behavior, 
     // and it needs fixing for this sesh

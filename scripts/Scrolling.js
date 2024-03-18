@@ -6,12 +6,10 @@ $(window).on('resize', function () {
 function updateViewportHeight() {
     let height = $(window).height();
     viewportHeight = height;
-    $("body").get(0).style.setProperty("--vh", (height/100) + "px");
+    $("body").get(0).style.setProperty("--vh", (height / 100) + "px");
 }
 updateViewportHeight();
 
-
-window.addEventListener('scroll', closeScrollCta);
 document.body.addEventListener('keydown', closeScrollCta);
 document.body.addEventListener('click', closeScrollCta);
 document.body.addEventListener('touchstart', closeScrollCta);
@@ -28,7 +26,7 @@ $.fn.isInViewport = function () {
 
 function closeScrollCta() {
     document.getElementById("scroll-cta").setAttribute("style", "display: none;")
-    setTimeout(() => {document.getElementById("music-cta").setAttribute("style", "display: none;")}, 1500);
+    setTimeout(() => { document.getElementById("music-cta").setAttribute("style", "display: none;") }, 1500);
 }
 
 window.onload = () => {
@@ -36,9 +34,9 @@ window.onload = () => {
 };
 
 function isTouchDevice() {
-  return (('ontouchstart' in window) ||
-     (navigator.maxTouchPoints > 0) ||
-     (navigator.msMaxTouchPoints > 0));
+    return (('ontouchstart' in window) ||
+        (navigator.maxTouchPoints > 0) ||
+        (navigator.msMaxTouchPoints > 0));
 }
 
 SmoothScroll({
@@ -56,10 +54,10 @@ SmoothScroll({
 });
 
 
-$(document).scroll(function () {
-    let scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
+$("#section-wrap").scroll(function () {
+    closeScrollCta();
+    let scrollPos = document.getElementById("section-wrap").scrollTop;
     let vh = viewportHeight;
-    console.log(viewportHeight);
 
     let screenCenter = scrollPos + 0.5 * vh;
 
@@ -74,59 +72,7 @@ $(document).scroll(function () {
         let divCenter = scrollPos + (rect.bottom + rect.top) / 2;
         let videoWrapper = section.getElementsByClassName("video-wrapper")[0];
         let calculatedTransform = 0;
-        calculatedTransform = (screenCenter - divCenter) / 3;
+        calculatedTransform = (screenCenter - divCenter) / 2.2;
         videoWrapper.setAttribute("style", "transform: translate3d(0px," + calculatedTransform + "px, 0px);");
     }
 })
-
-
-
-function calculateScroll() {
-    let scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
-    document.getElementById("smooth-scroll-wrapper").setAttribute("style", "transform: " + "translateY(-" + scrollPos + "px);");
-    return
-    // const transformArray = $("#smooth-scroll-wrapper").css("transform").split(",");
-    // let transformY = transformArray[transformArray.length-1].replace(")", "");
-    // if (transformY == "none") {
-    //     transformY = 0;
-    // } else {
-    //     transformY = Number(transformY);
-    // }
-
-    // const difference = Math.abs(scrollPos + transformY);
-
-
-    // if (isTouchDevice()) {
-    //     if (Math.abs(scrollPos + transformY) <= 10) {
-    //         document.getElementById("smooth-scroll-wrapper").setAttribute("style", "transform: " + "translateY(-" + scrollPos + "px);");
-    //     } else if ((scrollPos + transformY) > 0) {
-    //         document.getElementById("smooth-scroll-wrapper").setAttribute("style", "transform: " + "translateY(" + (transformY - 10) + "px);");
-    //     } else if ((scrollPos + transformY) < 0) {
-    //         document.getElementById("smooth-scroll-wrapper").setAttribute("style", "transform: " + "translateY(" + (transformY + 10) + "px);");
-    //     }
-
-    // } else {
-    //     if (Math.abs(scrollPos + transformY) <= 2) {
-    //         document.getElementById("smooth-scroll-wrapper").setAttribute("style", "transform: " + "translateY(-" + scrollPos + "px);");
-    //     } else if ((scrollPos + transformY) >= 0) {
-    //         if ((scrollPos + transformY) >= 400) {
-    //             window.scrollTo(0, 400 - transformY);
-    //         }
-    //         if ((scrollPos + transformY) >= 100) {
-    //             document.getElementById("smooth-scroll-wrapper").setAttribute("style", "transform: " + "translateY(" + (transformY - 10) + "px);");
-    //         } else {
-    //             document.getElementById("smooth-scroll-wrapper").setAttribute("style", "transform: " + "translateY(" + (transformY - Math.log(1+ ((scrollPos + transformY)/100) * (Math.E-1)) * 5)+ "px);");
-    //         }
-    //     } else if ((scrollPos + transformY) < -0) {
-    //         if ((scrollPos + transformY) <= -400) {
-    //             window.scrollTo(0, -400 - transformY);
-    //         }
-    //         if ((scrollPos + transformY) <= -100) {
-    //             document.getElementById("smooth-scroll-wrapper").setAttribute("style", "transform: " + "translateY(" + (transformY + 10) + "px);");
-    //         } else {
-    //             document.getElementById("smooth-scroll-wrapper").setAttribute("style", "transform: " + "translateY(" + (transformY + Math.log(1+ ((-scrollPos - transformY)/100) * (Math.E-1)) * 5) + "px);");
-    //         }
-    //     }
-
-    // }
-}

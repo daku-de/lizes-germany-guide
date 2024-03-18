@@ -28,301 +28,31 @@
     <link rel="icon" type="image/png" href="resources/icon/logo-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="resources/icon/logo-96x96.png" sizes="96x96">
 
+    <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/LoadingScreen.css">
     <link rel="stylesheet" href="stylesheets/Modal.css">
 
     <link rel="manifest" href="manifest.json" />
 </head>
-<style>
-    * {
-        box-sizing: border-box;
-    }
-    body {
-        display: flex;
-        flex-direction: column;
-        overflow-x: hidden;
-        color: white;
-        font-family: Space Grotesk;
-        font-size: .833333vw;
-        background-color: black;
-        height: 700vh;
-        height: calc(var(--vh, 1vh)*700);
-    }
-
-    video, img {
-        user-drag: none;
-        -webkit-user-drag: none;
-        user-select: none;
-        -moz-user-select: none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
-        -o-user-select: none;
-        width: auto;
-    }
-    a {
-        color: inherit;
-        font-weight: bold;
-        white-space: nowrap;
-    }
-    video {
-        pointer-events: none;
-    }
-    .header {
-        left: 0;
-        position: fixed;
-        right: 0;
-        top: 1.875em;
-        z-index: 999;
-        padding-left: 1.875em;
-        padding-right: 1.875em;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    #footer {
-        bottom: .6em;
-        top: auto;
-        pointer-events: none;
-    }
-    .header img {
-        max-height: 5em;
-    }
-    p {
-        line-height: 150%;
-        font-size: 1.25em;
-        text-align: justify;
-    }
-    .info p {
-        flex: 1;
-    }
-    #travel-info-button {
-        display: none;
-    }
-    #main-logo {
-        display: none;
-    }
-
-    .primary-button {
-        background-color: white;
-        color: black;
-        gap: 0.5em;
-        padding: 1.1875em 1.875em;
-        white-space: nowrap;
-        display: flex;
-        align-items: center;
-        border-radius: 20em;
-        cursor: pointer;
-        font-weight: bold;
-        user-select: none;
-        -moz-user-select: none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
-        -o-user-select: none;
-    }
-
-    .more-info-button {
-        margin: 0 auto;
-        padding: 0.6em 1em;
-        z-index: 1000;
-        margin-bottom: 1.5em;
-    }
-    
-    body::-webkit-scrollbar {
-        display: none;
-    }
-    .section {
-        height: 100vh;
-        height: calc(var(--vh, 1vh)*100);
-        width: 100vw;
-        overflow: hidden;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: end;
-        align-items: center;
-    }
-    .section-label {
-        display: flex;
-        flex-direction: column;
-        z-index: 10;
-        margin-left: 1.875em;
-        margin-right: 1.875em;
-        margin-bottom: 1.5em;
-        border-bottom: 1px solid hsla(0, 0%, 100%, .2);
-        padding-bottom: 1.5em;
-    }
-    .section-label img {
-        height: 4.7em;
-        max-height: 60px;
-        -webkit-filter: drop-shadow(0px 0px 6px #000000);
-        filter: drop-shadow(0px 0px 6px #000000);
-    }
-    .info {
-        display: flex;
-        justify-content: space-between;
-        gap: 2.5em;
-        flex: 1 1 0px;
-        /* background-color: rgba(0, 0, 0, 0.14);
-        border-radius: 1em;
-        padding-left: 0.2em;
-        padding-right: 0.2em; */
-        text-shadow: 2px 1px 0px #000000, 0px 0px 6px #000000;
-    }
-    #music-cta {
-        position: fixed;
-        bottom: 1em;
-        left: 5em;
-        z-index: 999;
-        opacity: 60%;
-        width: 100px;
-        display: none;
-    }
-
-
-    @media (max-width: 1024px) {
-        body {
-            font-size: 1.2vw;
-        }
-    }
-    @media (min-width: 769px) {
-        .section-label {
-            max-width: 55.125em;
-        }
-    }
-    @media (max-width: 768px) {
-        body {
-            font-size: 1.7vw;
-        }
-        .section-label {
-            gap: 1.5em;
-        }
-        .info {
-            display: block;
-            text-align: justify;
-        }
-        .info p {
-            display: inline;
-        }
-        .info p:not(:first-child) {
-            /* margin-left: 0.25em; */
-        }
-        #music-cta {
-            position: fixed;
-            bottom: 0.2em;
-            left: 6em;
-            z-index: 999;
-            opacity: 60%;
-            width: 60px;
-            transform: rotate(20deg);
-        }
-    }
-
-    @media (max-width: 640px) {
-        body {
-            font-size: 2.3vw;
-        }
-        p {
-            font-size: 1em;
-        }
-    }
-
-    .video-wrapper {
-        width: 100vw;
-        display: flex;
-        justify-content: center;
-        overflow: hidden;
-        height: 100vh;
-        height: calc(var(--vh, 1vh)*100);
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-
-    .video-wrapper video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    
-    body {
-        padding: 0;
-        margin: 0;
-    }
-    #overlay {
-        z-index: 9999;
-        position: fixed;
-        opacity: 0;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(3px);
-        pointer-events: none;
-        transition: 200ms ease-in-out;
-
-    }
-    #overlay.active {
-        opacity: 1;
-        pointer-events: all;
-    }
-
-    #music-button {
-        width: 3.375em;
-        height: 3.375em;
-        border-radius: 50%;
-        background-color: white;
-        cursor: pointer;
-        display: none;
-        justify-content: center;
-        align-items: center;
-        pointer-events: all;
-    }
-    #developed-by {
-        height: 4.5em;
-        display: none;
-    }
-    #scroll-cta {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 999;
-        font-size: 1.5em;
-        opacity: 60%;
-        line-height: 90%;
-        text-align: center;
-        gap: .5em;
-    }
-    .arrow {
-      animation: scroll .35s ease-in alternate infinite;
-    }
-    @keyframes scroll {
-        0% {
-            transform: translateY(0);
-        }
-        100% {
-            transform: translateY(10px);
-        }
-    }
-    @media (min-width: 720px) {
-        .video-wrapper {
-            height: 120vh;
-            height: calc(var(--vh, 1vh)*120);
-        }
-    }
-    @media (max-width: 480px) and (min-width: 400px) {
-    .modal p {
-        line-height: 100%;
-    }
-}
-
-</style>
 <body>
+
+    <div id="loading-overlay">
+        <div id="cat-wrap">
+            <div id="walking-cat">
+                <div id="marco">
+                    <div id="cielo"></div>
+                    <div id="luna"></div>
+                    <div id="gato"></div>
+                    <div id="muro"></div>
+                    <div id="edificios"></div>
+                </div>
+            </div>
+        </div>
+        <div id="loading-label">Loading resources, please wait<p id="dots"
+                style="display: inline; margin: 0; position: absolute; line-height: normal; font-size: inherit;"></p>
+        </div>
+    </div>
+
     <div id="overlay" data-close-modal></div>
     <div id="scroll-cta">
         <div>SCROLL<br>FOR MORE</div>
@@ -342,109 +72,111 @@
         </div>
     </div>
 
-    <div class="section">
-        <div class="video-wrapper">
-            <video src="resources/videos/neuschwanstein.mp4" autoplay loop muted preload playsinline></video>
-        </div>
-        <div class="section-label">
-            <div><img src="resources/pictures/NC-logo-text.png" alt=""></div>
-            <div class="info">
-                <p><b>Schloss Neuschwanstein</b>, is a fairy-tale-like castle located in the German Alps. It's an iconic symbol of romantic architecture.</p>
-                <p>From its appearance, you can tell that this place was the original inspiration of the world-renowned Disney castle!</p>
+    <div id="section-wrap">
+        <div class="section">
+            <div class="video-wrapper">
+                <video src="resources/videos/neuschwanstein.mp4" autoplay loop muted preload playsinline></video>
+            </div>
+            <div class="section-label">
+                <div><img src="resources/pictures/NC-logo-text.png" alt=""></div>
+                <div class="info">
+                    <p><b>Schloss Neuschwanstein</b>, is a fairy-tale-like castle located in the German Alps. It's an iconic symbol of romantic architecture.</p>
+                    <p>From its appearance, you can tell that this place was the original inspiration of the world-renowned Disney castle!</p>
+                </div>
+            </div>
+            <div class="more-info-button primary-button" data-modal-target="#modal-neuschwanstein">
+                More info about this
             </div>
         </div>
-        <div class="more-info-button primary-button" data-modal-target="#modal-neuschwanstein">
-            More info about this
-        </div>
-    </div>
-    <div class="section">
-        <div class="video-wrapper">
-            <video src="resources/videos/europapark.mp4" loop muted preload playsinline></video>
-        </div>
-        <div class="section-label">
-            <div><img src="resources/pictures/EP-logo.png" alt=""></div>
-            <div class="info">
-                <p>Located right at the French border, <b>Europapark</b> is one of the biggest and most popular theme parks in Europe. While it </p>
-                <p>offers many thrilling rollercoasters you can also find a lot of more relaxed activities and just enjoy the atmosphere.</p>
+        <div class="section">
+            <div class="video-wrapper">
+                <video src="resources/videos/europapark.mp4" loop muted preload playsinline></video>
+            </div>
+            <div class="section-label">
+                <div><img src="resources/pictures/EP-logo.png" alt=""></div>
+                <div class="info">
+                    <p>Located right at the French border, <b>Europapark</b> is one of the biggest and most popular theme parks in Europe. While it </p>
+                    <p>offers many thrilling rollercoasters you can also find a lot of more relaxed activities and just enjoy the atmosphere.</p>
+                </div>
+            </div>
+            <div class="more-info-button primary-button" data-modal-target="#modal-europapark">
+                More info about this
             </div>
         </div>
-        <div class="more-info-button primary-button" data-modal-target="#modal-europapark">
-            More info about this
-        </div>
-    </div>
-    <div class="section">
-        <div class="video-wrapper">
-            <video src="resources/videos/rothenburg.mp4" loop muted preload playsinline></video>
-        </div>
-        <div class="section-label">
-            <div><img src="resources/pictures/RodT-logo-text.png" alt=""></div>
-            <div class="info">
-                <p>This beautiful medieval German city, close to my hometown, is a great place to dive into Germany's history. You can wander</p>
-                <p>through the small old-town and enjoy the well-preserved architecture. It is also known as the Christmas capital of Germany</p>
+        <div class="section">
+            <div class="video-wrapper">
+                <video src="resources/videos/rothenburg.mp4" loop muted preload playsinline></video>
+            </div>
+            <div class="section-label">
+                <div><img src="resources/pictures/RodT-logo-text.png" alt=""></div>
+                <div class="info">
+                    <p>This beautiful medieval German city, close to my hometown, is a great place to dive into Germany's history. You can wander</p>
+                    <p>through the small old-town and enjoy the well-preserved architecture. It is also known as the Christmas capital of Germany</p>
+                </div>
+            </div>
+            <div class="more-info-button primary-button" data-modal-target="#modal-rothenburg">
+                More info about this
             </div>
         </div>
-        <div class="more-info-button primary-button" data-modal-target="#modal-rothenburg">
-            More info about this
-        </div>
-    </div>
-    <div class="section">
-        <div class="video-wrapper">
-            <video src="resources/videos/hamburg.mp4" loop muted preload playsinline></video>
-        </div>
-        <div class="section-label">
-            <div><img src="resources/pictures/HB-logo-text.png" alt=""></div>
-            <div class="info">
-                <p>The port city <b>Hamburg</b>, is probably the prettiest city in Germany. You can see modern architecture merged with historic</p>
-                <p>ambiance giving it a timeless unique look. The waterfront is really beautiful as well, adding to the city's charm.</p>
+        <div class="section">
+            <div class="video-wrapper">
+                <video src="resources/videos/hamburg.mp4" loop muted preload playsinline></video>
+            </div>
+            <div class="section-label">
+                <div><img src="resources/pictures/HB-logo-text.png" alt=""></div>
+                <div class="info">
+                    <p>The port city <b>Hamburg</b>, is probably the prettiest city in Germany. You can see modern architecture merged with historic</p>
+                    <p>ambiance giving it a timeless unique look. The waterfront is really beautiful as well, adding to the city's charm.</p>
+                </div>
+            </div>
+            <div class="more-info-button primary-button" data-modal-target="#modal-hamburg">
+                More info about this
             </div>
         </div>
-        <div class="more-info-button primary-button" data-modal-target="#modal-hamburg">
-            More info about this
-        </div>
-    </div>
-    <div class="section">
-        <div class="video-wrapper">
-            <video src="resources/videos/bodensee.mp4" loop muted preload playsinline></video>
-        </div>
-        <div class="section-label">
-            <div><img src="resources/pictures/Bodensee-logo.png" alt=""></div>
-            <div class="info">
-                <p>Lake Constance or <b>Bodensee</b> is a lake in the south of Germany. Due to the being right at the border, it is shared with Austria</p>
-                <p>and Switzerland. The area is beautiful and offers many outdoor activities. It is also a perfect place to learn how to ride a bike.</p>
+        <div class="section">
+            <div class="video-wrapper">
+                <video src="resources/videos/bodensee.mp4" loop muted preload playsinline></video>
+            </div>
+            <div class="section-label">
+                <div><img src="resources/pictures/Bodensee-logo.png" alt=""></div>
+                <div class="info">
+                    <p>Lake Constance or <b>Bodensee</b> is a lake in the south of Germany. Due to the being right at the border, it is shared with Austria</p>
+                    <p>and Switzerland. The area is beautiful and offers many outdoor activities. It is also a perfect place to learn how to ride a bike.</p>
+                </div>
+            </div>
+            <div class="more-info-button primary-button" data-modal-target="#modal-bodensee">
+                More info about this
             </div>
         </div>
-        <div class="more-info-button primary-button" data-modal-target="#modal-bodensee">
-            More info about this
-        </div>
-    </div>
-    <div class="section">
-        <div class="video-wrapper">
-            <video src="resources/videos/koeln.mp4" loop muted preload playsinline></video>
-        </div>
-        <div class="section-label">
-            <div><img src="resources/pictures/Köln-logo.png" alt=""></div>
-            <div class="info">
-                <p><b>Köln</b> is famous for it's astonishing cathedral. But also apart from that, the whole city is beautiful and charming.</p>
-                <p>The unique carnival in Köln also offers a great experience. Especially the parade is really interesting. You shouldn't miss it.</p>
+        <div class="section">
+            <div class="video-wrapper">
+                <video src="resources/videos/koeln.mp4" loop muted preload playsinline></video>
+            </div>
+            <div class="section-label">
+                <div><img src="resources/pictures/Köln-logo.png" alt=""></div>
+                <div class="info">
+                    <p><b>Köln</b> is famous for it's astonishing cathedral. But also apart from that, the whole city is beautiful and charming.</p>
+                    <p>The unique carnival in Köln also offers a great experience. Especially the parade is really interesting. You shouldn't miss it.</p>
+                </div>
+            </div>
+            <div class="more-info-button primary-button" data-modal-target="#modal-koeln">
+                More info about this
             </div>
         </div>
-        <div class="more-info-button primary-button" data-modal-target="#modal-koeln">
-            More info about this
-        </div>
-    </div>
-    <div class="section">
-        <div class="video-wrapper">
-            <video src="resources/videos/lofoten-min.mp4" loop muted preload playsinline></video>
-        </div>
-        <div class="section-label">
-            <div><img src="resources/pictures/Lofoten-logo.png" alt=""></div>
-            <div class="info">
-                <p>It's not in Germany, but because I know how much you enjoyed New Zealand, I have to recommend you Norway, in particular</p>
-                <p>the <b>Lofoten</b>! I'm sure the stunning nature will remind you of New Zealand and as a cherry on top you can also see the aurora!</p>
+        <div class="section">
+            <div class="video-wrapper">
+                <video src="resources/videos/lofoten.mp4" loop muted preload playsinline></video>
             </div>
-        </div>
-        <div class="more-info-button primary-button" data-modal-target="#modal-lofoten">
-            More info about this
+            <div class="section-label">
+                <div><img src="resources/pictures/Lofoten-logo.png" alt=""></div>
+                <div class="info">
+                    <p>It's not in Germany, but because I know how much you enjoyed New Zealand, I have to recommend you Norway, in particular</p>
+                    <p>the <b>Lofoten</b>! I'm sure the stunning nature will remind you of New Zealand and as a cherry on top you can also see the aurora!</p>
+                </div>
+            </div>
+            <div class="more-info-button primary-button" data-modal-target="#modal-lofoten">
+                More info about this
+            </div>
         </div>
     </div>
 
@@ -537,7 +269,7 @@
             <div class="paragraphs">
                 <p>
                     EUROPAPARK really is an awesome theme park with many awesome attractions. I went here many
-                    times with my family when I was younger. And every single time I was impressed afterwards.
+                    times with my family when I was younger.
                     It is themed around different European countries, so it really is a perfect spot to visit
                     on a Europe trip.
                 </p>
@@ -546,8 +278,6 @@
                     camping site! Hotel guests also have advantages like an early park entry. Which is really
                     awesome because you can experience a popular attraction with almost no waiting time!
                     I highly recommend staying there and visiting the park for at least 2 days. There is so so much to do.
-                </p>
-                <p>
                     I know you think you can't ride rollercoasters well anymore but maybe someone can convince you
                     to try one of the many thrilling rides, else you will really miss out! You can do it!
                 </p>
@@ -1039,6 +769,8 @@
                 <p>
                     <br>
                     Enjoy your time in Germany and have an awesome holiday!
+                    <br>
+                    And don't be shy to use your German skills! 구턴탁 이게 레카
                 </p>
             </div>
         </div>
@@ -1059,7 +791,7 @@
                         There is a hotline for that, you can reach them with this phone number <a href="tel:+493012074182">+49 30-12074182</a>. You can be on a call with
                         them
                         until you reach your accommodation.
-                        They will help you get home safely and it's completely for free. Please don't be shy to use it!
+                        They will help you get home safely and it's completely for free. Please don't hold back to use it!
                         Furthermore if you go to a bar, or something similar, never take a drink from a stranger or leave your drink
                         unattended!
                         They could add knockout drops to your drink, that make you lose your conciousness, so be careful.
@@ -1091,20 +823,6 @@
         </div>
     </div>
 
-    <div id="loading-overlay">
-        <div id="cat-wrap">
-            <div id="walking-cat">
-                <div id="marco">
-                    <div id="cielo"></div>
-                    <div id="luna"></div>
-                    <div id="gato"></div>
-                    <div id="muro"></div>
-                    <div id="edificios"></div>
-                </div>
-            </div>
-        </div>
-        <div id="loading-label">Loading resources, please wait<p id="dots" style="display: inline; margin: 0; position: absolute; line-height: normal; font-size: inherit;"></p></div>
-    </div>
     <div id="footer" class="header">
         <div id="music-button">
 
@@ -1138,7 +856,12 @@
         closeLoader();
     }
 
-    $(window).scroll(function () {
+    setTimeout(() => {
+        // If it hasn't loaded after 10 seconds
+        document.getElementById("loading-overlay").classList.add("hidden");
+    }, 10000);
+
+    $("#section-wrap").scroll(function () {
         $('video').each(function () {
             if ($(this).closest(".section").isInViewport()) {
                 $(this)[0].play();

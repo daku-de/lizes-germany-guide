@@ -23,7 +23,7 @@ const dotInterval = setInterval(() => {
 
 function closeLoader() {
     document.getElementById("loading-overlay").classList.add("hidden");
-    document.getElementsByTagName('body')[0].style.overflow = 'visible';
+    document.getElementsByTagName('body')[0].style.overflowY = 'visible';
     clearInterval(dotInterval);
     setTimeout(() => {
 
