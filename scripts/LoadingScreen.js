@@ -32,14 +32,18 @@ function closeLoader() {
         let headerAnimInterval = setInterval(() => {
             if (headerAnimY > 0) {
                 headerAnimY -= 5;
-                document.getElementById("main-logo").setAttribute("style", "display: flex; transform: translateY(" + Math.round(headerAnimY / 7) + "px); opacity: " + (100 - headerAnimY) / 100)
-                document.getElementById("music-button").setAttribute("style", "display: flex; transform: translateY(" + Math.round(headerAnimY / 7) + "px); opacity: " + (100 - headerAnimY) / 100)
-                document.getElementById("music-cta").setAttribute("style", "display: flex; transform: translateY(" + Math.round(headerAnimY / 7) + "px); opacity: " + (100 - headerAnimY) / 100)
+                try {
+                    document.getElementById("main-logo").setAttribute("style", "display: flex; transform: translateY(" + Math.round(headerAnimY / 7) + "px); opacity: " + (100 - headerAnimY) / 100)
+                    document.getElementById("music-button").setAttribute("style", "display: flex; transform: translateY(" + Math.round(headerAnimY / 7) + "px); opacity: " + (100 - headerAnimY) / 100)
+                    document.getElementById("music-cta").setAttribute("style", "display: flex; transform: translateY(" + Math.round(headerAnimY / 7) + "px); opacity: " + Math.max(0, (60 - headerAnimY) / 100))
+                } catch {}
             } else {
-                document.getElementById("main-logo").setAttribute("style", "display: flex; transform: translateY(0px);")
-                document.getElementById("music-button").setAttribute("style", "display: flex; transform: translateY(0px);")
-                document.getElementById("music-cta").setAttribute("style", "display: flex; transform: translateY(0px);")
                 clearInterval(headerAnimInterval);
+                try {
+                    document.getElementById("main-logo").setAttribute("style", "display: flex; transform: translateY(0px);")
+                    document.getElementById("music-button").setAttribute("style", "display: flex; transform: translateY(0px);")
+                    document.getElementById("music-cta").setAttribute("style", "display: flex; transform: translateY(0px);")
+                } catch {}
             }
         }, 15);
 

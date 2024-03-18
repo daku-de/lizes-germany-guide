@@ -1,6 +1,6 @@
 const cookie = document.cookie;
 if (cookie.includes("musicPlayed")) {
-    document.getElementById("music-cta").setAttribute("style", "display: none;");
+    document.getElementById("music-cta").remove();
 }
 
 document.getElementById("music-button").addEventListener("click", () => {
